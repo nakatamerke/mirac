@@ -52,15 +52,12 @@
     <!-- Ana Kart -->
     <div class="glass-panel w-full max-w-md rounded-3xl p-6 md:p-8 relative z-10 flex flex-col items-center text-center fade-in-up border-t border-slate-700">
         
-        <!-- TÜRK BAYRAĞI (GENİŞ VE TAM OTURAN) -->
+        <!-- TÜRK BAYRAĞI -->
         <div class="mb-8 w-full flex justify-center">
             <div class="w-48 h-32 md:w-56 md:h-36 rounded-xl overflow-hidden border-[3px] border-slate-800 flag-container relative bg-[#E30A17] group hover:scale-105 transition-transform duration-500">
-                <!-- Resmi Wikipedia SVG'si - Resim olduğu için bozulmaz -->
                 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" 
                      alt="Türk Bayrağı" 
                      class="w-full h-full object-cover">
-                
-                <!-- Parlama Efekti -->
                 <div class="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent pointer-events-none"></div>
             </div>
         </div>
@@ -121,67 +118,60 @@
     <script>
         lucide.createIcons();
 
+        // Tertemiz Mesaj Listesi
         const messages = [
             "Allah'ın rahmeti, bereketi ve mağfireti üzerinize olsun. Bu mübarek gecede dualarınız kabul olsun. Hayırlı Kandiller.",
-            "Rabbim! Bu gece hürmetine, ümmet-i Muhammed'e birlik, dirlik ve ferahlık ver. Miraç Kandiliniz mübarek olsun.",
-            "Bu gece kulun Rabbine en yakın olduğu gecedir. Dualarınızda bizleri de unutmayın. Miraç Kandiliniz mübarek olsun.",
-            "Gönüller duada birleşince kapılar ardına kadar açılırmış. Miraç Kandiliniz mübarek, dualarınız kabul olsun.",
-            "Ellerin semaya, dillerin duaya, gönüllerin Mevla'ya yöneldiği bu mübarek gecede dualarınız kabul olsun. Hayırlı Kandiller.",
-            "Miraç; yükseliştir, arınmadır. Bu mübarek gecede dualarınızın göklere yükselip kabul olması dileğiyle. Kandiliniz mübarek olsun.",
-            "Avuçların açıldığı, gözlerin yaşardığı, ilahi esintilerin kalpleri okşadığı bir gece olsun. Miraç Kandiliniz mübarek olsun.",
-            "Bir dua gönderiyorum size, sağlık, mutluluk ve huzur olsun diye. Miraç Kandiliniz mübarek olsun.",
-            "Yükü sevgi, özü saygı, gücü barış, süsü hoşgörü olan mübarek Miraç Kandilinizi tebrik ederim. Hayırlı Kandiller.",
-            "Kalpler vardır sevgiyi yaşatmak için, insanlar vardır dostluğu paylaşmak için, günler vardır Rabbimle buluşmak için. Kandiliniz mübarek olsun.",
-            "Bu gece Peygamber Efendimiz'in miraca yükseldiği şerefli gecedir. Rabbim feyzinden istifade etmeyi nasip etsin. Hayırlı Kandiller.",
-            "Gecenin sahibine emanet olun. Dualarınız kabul, günahlarınız affolsun. Miraç Kandiliniz mübarek olsun.",
-            "Semaya açılan ellerin boş çevrilmeyeceği bu gecede, tüm dualarınızın kabul olmasını dilerim. Miraç Kandiliniz mübarek olsun.",
-            "Ruhunuza huzur, evinize bereket, kalbinize nur dolsun. Miraç Kandiliniz mübarek olsun.",
-            "İlahi rahmetin sağanak gibi yağdığı bu gecede, damlaların kalbinize işlemesi dileğiyle. Hayırlı Kandiller.",
-            "Miraç mucizesi hayatınıza nur, kalbinize huzur getirsin. Rabbim dualarımızı dergahında kabul eylesin. Mübarek olsun.",
-            "Bugün ellerinizi her zamankinden daha çok açın, avucunuza melekler gül koysun, yüreğiniz coşsun. Miraç Kandiliniz mübarek olsun.",
-            "Bin aydan daha hayırlı olmasa da, gecelerin en şereflilerinden olan Miraç geceniz mübarek, dualarınız kabul olsun.",
-            "Rabbim bizi, bu gecenin feyziyle arınan ve miraca yükselen kullarından eylesin. Kandiliniz mübarek olsun.",
-            "Dertlerin kum tanesi kadar küçük, sevinçlerin nisan yağmuru kadar bol olsun. Bu mübarek gecede duaların kabul olsun. Hayırlı Kandiller."
+            "Rabbim! Bu gece hürmetine, ümmet-i Muhammed'e birlik, dirlik ve ferahlık ver. Kandiliniz mübarek olsun.",
+            "Bu gece kulun Rabbine en yakın olduğu gecedir. Dualarınızda bizleri de unutmayın.",
+            "Gönüller duada birleşince kapılar ardına kadar açılırmış. Dualarınız kabul olsun.",
+            "Ellerin semaya, dillerin duaya, gönüllerin Mevla'ya yöneldiği bu mübarek gecede dualarınız kabul olsun.",
+            "Miraç; yükseliştir, arınmadır. Bu mübarek gecede dualarınızın göklere yükselip kabul olması dileğiyle.",
+            "Avuçların açıldığı, gözlerin yaşardığı, ilahi esintilerin kalpleri okşadığı bir gece olsun.",
+            "Bir dua gönderiyorum size, sağlık, mutluluk ve huzur olsun diye. Kandiliniz mübarek olsun.",
+            "Yükü sevgi, özü saygı, gücü barış, süsü hoşgörü olan mübarek Miraç Kandilinizi en içten dileklerimle kutlarım.",
+            "Kalpler vardır sevgiyi yaşatmak için, insanlar vardır dostluğu paylaşmak için, günler vardır Rabbimle buluşmak için.",
+            "Bu gece Peygamber Efendimiz'in miraca yükseldiği şerefli gecedir. Rabbim feyzinden istifade etmeyi nasip etsin.",
+            "Gecenin sahibine emanet olun. Dualarınız kabul, günahlarınız affolsun.",
+            "Semaya açılan ellerin boş çevrilmeyeceği bu gecede, tüm dualarınızın kabul olmasını dilerim.",
+            "Ruhunuza huzur, evinize bereket, kalbinize nur dolsun.",
+            "İlahi rahmetin sağanak gibi yağdığı bu gecede, damlaların kalbinize işlemesi dileğiyle.",
+            "Miraç mucizesi hayatınıza nur, kalbinize huzur getirsin. Rabbim dualarımızı dergahında kabul eylesin.",
+            "Bugün ellerinizi her zamankinden daha çok açın, avucunuza melekler gül koysun, yüreğiniz coşsun.",
+            "Bu mübarek gece, kalplerin arınmasına ve duaların kabulüne vesile olsun.",
+            "Rabbim bizi, bu gecenin feyziyle arınan ve miraca yükselen kullarından eylesin.",
+            "Dertlerin kum tanesi kadar küçük, sevinçlerin nisan yağmuru kadar bol olsun. Duaların kabul olsun."
         ];
-
-        const sacredNames = ["Allah", "Rabbim", "Miraç", "Peygamber", "Mevla", "Kuran", "Hz", "İslam", "Muhammed", "Kabe", "Medine", "Mekke"];
 
         let currentBaseMessage = "";
 
-        // Akıllı Harf Sistemi
-        function smartLowerCase(text) {
-            let firstWord = text.split(' ')[0];
-            let rest = text.substring(firstWord.length);
-            let isSacred = sacredNames.some(name => firstWord.toLowerCase().startsWith(name.toLowerCase()));
+        // Mesaj Oluşturucu (Prefix Mantığı)
+        function getMessageText(isWhatsApp = false) {
+            const nameInput = document.getElementById('recipient-name').value.trim();
+            const prefixPhrase = "Miraç Kandilinizi tebrik ederim.";
             
-            if (isSacred) {
-                return firstWord + rest;
+            // Eğer isim varsa: "Ahmet, Miraç Kandilinizi tebrik ederim. [Dua]"
+            // Eğer isim yoksa: "Miraç Kandilinizi tebrik ederim. [Dua]"
+            
+            let finalPrefix = "";
+            
+            if (nameInput) {
+                // WhatsApp için ismi kalın yap
+                const formattedName = isWhatsApp ? `*${nameInput}*` : `<span class="text-amber-400 font-semibold not-italic">${nameInput}</span>`;
+                finalPrefix = `${formattedName}, ${prefixPhrase} `;
             } else {
-                return firstWord.charAt(0).toLowerCase() + firstWord.slice(1) + rest;
+                finalPrefix = `${prefixPhrase} `;
             }
-        }
 
-        // Önizleme HTML
-        function getFullMessage() {
-            const nameInput = document.getElementById('recipient-name').value.trim();
-            if (nameInput) {
-                return `<span class="text-amber-400 font-semibold not-italic">${nameInput}</span>, ${smartLowerCase(currentBaseMessage)}`;
-            }
-            return currentBaseMessage;
-        }
-
-        // WhatsApp ve Kopyalama (Düz Metin)
-        function getRawMessageForSharing() {
-            const nameInput = document.getElementById('recipient-name').value.trim();
-            if (nameInput) {
-                return `*${nameInput}*, ${smartLowerCase(currentBaseMessage)}`;
-            }
-            return currentBaseMessage;
+            return finalPrefix + currentBaseMessage;
         }
 
         function updatePreview() {
             const contentDiv = document.getElementById('message-content');
-            contentDiv.innerHTML = getFullMessage();
+            contentDiv.innerHTML = getMessageText(false); // HTML formatı
+        }
+
+        function getRawMessageForSharing() {
+            return getMessageText(true); // WhatsApp formatı (*İsim*)
         }
 
         function newMessage() {
@@ -205,7 +195,7 @@
         }
 
         function copyMessage() {
-            const textToCopy = getRawMessageForSharing().replace(/\*/g, '');
+            const textToCopy = getRawMessageForSharing().replace(/\*/g, ''); // Yıldızları temizle
             navigator.clipboard.writeText(textToCopy).then(() => {
                 const copyBtn = document.getElementById('copy-btn');
                 const copyText = document.getElementById('copy-text');
