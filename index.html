@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Miraç Kandili & Zikirmatik</title>
+    <title>Miraç Kandili</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -34,6 +34,274 @@
 
         /* Bayrak Dalgalanma Efekti */
         .flag-container {
+            box-shadow: 0 15px 40px -10px rgba(227, 10, 23, 0.4);
+            transform: perspective(1000px) rotateX(5deg);
+        }
+
+        /* Zikirmatik Buton Efekti */
+        .zikir-btn:active {
+            transform: scale(0.98);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-[#020617] text-slate-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden selection:bg-amber-500/30">
+
+    <!-- Arkaplan Atmosferi -->
+    <div class="fixed inset-0 pointer-events-none">
+        <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-indigo-900/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-amber-700/10 rounded-full blur-[100px]"></div>
+        <!-- Yıldızlar -->
+        <div class="absolute top-10 left-8 text-slate-500/20 animate-pulse"><i data-lucide="star" width="20"></i></div>
+        <div class="absolute bottom-32 right-12 text-slate-500/20 animate-pulse delay-1000"><i data-lucide="star" width="28"></i></div>
+    </div>
+
+    <div class="w-full max-w-md space-y-6 relative z-10 fade-in pb-4">
+        
+        <!-- 1. KART: Mesajlaşma Bölümü -->
+        <div class="glass-panel w-full rounded-3xl p-6 md:p-8 flex flex-col items-center text-center border-t border-white/5">
+            
+            <!-- TÜRK BAYRAĞI -->
+            <div class="mb-6 w-full flex justify-center">
+                <div class="w-40 h-28 md:w-48 md:h-32 rounded-xl overflow-hidden border-[3px] border-slate-800 flag-container relative bg-[#E30A17] group hover:scale-105 transition-transform duration-500">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" 
+                         alt="Türk Bayrağı" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent pointer-events-none"></div>
+                </div>
+            </div>
+
+            <h1 class="text-3xl font-bold text-white mb-2 tracking-wide">Miraç Kandili</h1>
+            
+            <div class="flex items-center justify-center gap-3 w-full mb-6">
+                <div class="h-[1px] w-8 bg-slate-700"></div>
+                <p class="text-amber-500/80 text-[10px] font-bold tracking-[0.3em] uppercase">15 OCAK 2026</p>
+                <div class="h-[1px] w-8 bg-slate-700"></div>
+            </div>
+
+            <!-- İsim Girişi -->
+            <div class="w-full mb-5 group relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i data-lucide="pen-line" class="text-slate-500 w-4 h-4"></i>
+                </div>
+                <input type="text" id="recipient-name" placeholder="Kime? (Örn: Canım Annem)" 
+                    class="input-area w-full pl-10 pr-4 py-3.5 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-500/50 transition-all text-sm font-medium"
+                    oninput="updatePreview()">
+            </div>
+
+            <!-- Mesaj Kartı -->
+            <div class="w-full bg-slate-900/40 border border-slate-700/40 rounded-2xl p-6 mb-6 min-h-[140px] flex flex-col items-center justify-center relative group">
+                <i data-lucide="quote" class="absolute top-3 left-3 text-slate-700 w-4 h-4 rotate-180 opacity-60"></i>
+                
+                <div id="message-content" class="text-lg serif-font leading-relaxed text-slate-200 transition-all duration-300 px-1 italic">
+                    Yükleniyor...
+                </div>
+                
+                <i data-lucide="quote" class="absolute bottom-3 right-3 text-slate-700 w-4 h-4 opacity-60"></i>
+
+                <button onclick="copyMessage()" class="absolute -top-3 right-4 flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 py-1.5 px-3 rounded-full transition-all border border-slate-600 shadow-lg cursor-pointer" id="copy-btn">
+                    <i data-lucide="copy" width="12" height="12"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-wider" id="copy-text">KOPYALA</span>
+                </button>
+            </div>
+
+            <!-- Butonlar -->
+            <div class="flex flex-col gap-3 w-full">
+                <button onclick="shareWhatsApp()" class="w-full py-3.5 px-6 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-green-900/20 transition-transform active:scale-95">
+                    <i data-lucide="message-circle" width="20" height="20"></i>
+                    WhatsApp ile Gönder
+                </button>
+                
+                <button onclick="newMessage()" class="w-full py-3.5 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium flex items-center justify-center gap-2 border border-slate-700 transition-transform active:scale-95 group">
+                    <i data-lucide="sparkles" width="18" height="18" class="text-amber-400 group-hover:spin-slow"></i>
+                    Farklı Bir Dua Getir
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. KART: ZİKİRMATİK BÖLÜMÜ -->
+        <div class="glass-panel w-full rounded-3xl p-6 relative overflow-hidden border-t border-white/5">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent opacity-50"></div>
+            
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 bg-amber-500/10 rounded-lg text-amber-400">
+                        <i data-lucide="fingerprint" width="20" height="20"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Sanal Zikirmatik</h3>
+                        <p class="text-[10px] text-slate-400">Salavat ve Tesbihat İçin</p>
+                    </div>
+                </div>
+                <button onclick="resetZikir()" class="text-slate-500 hover:text-red-400 transition-colors p-2" title="Sıfırla">
+                    <i data-lucide="rotate-ccw" width="16" height="16"></i>
+                </button>
+            </div>
+
+            <!-- Sayaç Alanı -->
+            <button onclick="incrementZikir()" class="w-full zikir-btn bg-slate-900/50 border border-slate-700/50 rounded-2xl h-32 flex flex-col items-center justify-center gap-1 transition-all touch-manipulation group relative overflow-hidden">
+                <span class="text-[10px] text-slate-500 uppercase tracking-widest group-hover:text-amber-500/70 transition-colors">Zikir Sayısı</span>
+                <span id="zikir-count" class="text-5xl font-bold text-white font-mono tracking-tighter">0</span>
+                
+                <div class="absolute inset-0 bg-amber-500/0 group-active:bg-amber-500/5 transition-colors duration-75"></div>
+            </button>
+        </div>
+
+        <!-- FOOTER: Tasarım İmzası ve Instagram Linki -->
+        <footer class="flex flex-col items-center justify-center gap-2 mt-2 opacity-60 hover:opacity-100 transition-opacity">
+            <p class="text-[10px] text-slate-500 uppercase tracking-widest">Dualarda Buluşalım</p>
+            
+            <a href="https://www.instagram.com/ekrematakan?igsh=MTNuOHpsZnd6ZHhheQ==" target="_blank" rel="noopener noreferrer" 
+               class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/40 hover:bg-amber-500/10 border border-transparent hover:border-amber-500/20 transition-all group">
+                <i data-lucide="instagram" width="12" height="12" class="text-slate-400 group-hover:text-amber-500 transition-colors"></i>
+                <span class="text-[10px] text-slate-400 group-hover:text-amber-400 font-medium transition-colors tracking-wide">Tasarım: Ekrem Atakan</span>
+            </a>
+        </footer>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // --- BÖLÜM 1: MESAJ SİSTEMİ (TEMİZLENMİŞ LİSTE) ---
+        const messages = [
+            "Allah'ın rahmeti, bereketi ve mağfireti üzerinize olsun. Bu mübarek gecede dualarınız kabul olsun. Hayırlı Kandiller.",
+            "Rabbim! Bu gece hürmetine, ümmet-i Muhammed'e birlik, dirlik ve ferahlık ver. Miraç Kandiliniz mübarek olsun.",
+            "Bu gece kulun Rabbine en yakın olduğu gecedir. Dualarınızda bizleri de unutmayın. Hayırlı Kandiller.",
+            "Gönüller duada birleşince kapılar ardına kadar açılırmış. Dualarınız kabul, Miraç Kandiliniz mübarek olsun.",
+            "Ellerin semaya, dillerin duaya, gönüllerin Mevla'ya yöneldiği bu mübarek gecede dualarınız kabul olsun. Hayırlı Kandiller.",
+            "Miraç; yükseliştir, arınmadır. Bu mübarek gecede dualarınızın göklere yükselip kabul olması dileğiyle. Kandiliniz mübarek olsun.",
+            "Avuçların açıldığı, gözlerin yaşardığı, ilahi esintilerin kalpleri okşadığı bir gece olsun. Miraç Kandiliniz mübarek olsun.",
+            "Bir dua gönderiyorum size, sağlık, mutluluk ve huzur olsun diye. Miraç Kandiliniz mübarek olsun.",
+            "Yükü sevgi, özü saygı, gücü barış, süsü hoşgörü olan mübarek Miraç Kandilinizi tebrik ederim.",
+            "Kalpler vardır sevgiyi yaşatmak için, insanlar vardır dostluğu paylaşmak için, günler vardır Rabbimle buluşmak için. Hayırlı Kandiller.",
+            "Bu gece Peygamber Efendimiz'in miraca yükseldiği şerefli gecedir. Rabbim feyzinden istifade etmeyi nasip etsin. Hayırlı Kandiller.",
+            "Gecenin sahibine emanet olun. Dualarınız kabul, günahlarınız affolsun. Miraç Kandiliniz mübarek olsun.",
+            "Semaya açılan ellerin boş çevrilmeyeceği bu gecede, tüm dualarınızın kabul olmasını dilerim. Hayırlı Kandiller.",
+            "Ruhunuza huzur, evinize bereket, kalbinize nur dolsun. Miraç Kandiliniz mübarek olsun.",
+            "İlahi rahmetin sağanak gibi yağdığı bu gecede, damlaların kalbinize işlemesi dileğiyle. Kandiliniz mübarek olsun.",
+            "Miraç mucizesi hayatınıza nur, kalbinize huzur getirsin. Rabbim dualarımızı dergahında kabul eylesin. Hayırlı Kandiller.",
+            "Bugün ellerinizi her zamankinden daha çok açın, avucunuza melekler gül koysun, yüreğiniz coşsun. Miraç Kandiliniz mübarek olsun.",
+            "Rabbim bizi, bu gecenin feyziyle arınan ve miraca yükselen kullarından eylesin. Kandiliniz mübarek olsun.",
+            "Dertlerin kum tanesi kadar küçük, sevinçlerin nisan yağmuru kadar bol olsun. Duaların kabul olsun. Hayırlı Kandiller."
+        ];
+
+        // Kutsal İsimler Listesi
+        const sacredNames = ["Allah", "Rabbim", "Miraç", "Peygamber", "Mevla", "Kuran", "Hz", "İslam", "Muhammed", "Kabe", "Medine", "Mekke"];
+
+        let currentBaseMessage = "";
+
+        // Akıllı Harf Sistemi
+        function smartLowerCase(text) {
+            let firstWord = text.split(' ')[0];
+            let rest = text.substring(firstWord.length);
+            let isSacred = sacredNames.some(name => firstWord.toLowerCase().startsWith(name.toLowerCase()));
+            
+            if (isSacred) {
+                return firstWord + rest;
+            } else {
+                return firstWord.charAt(0).toLowerCase() + firstWord.slice(1) + rest;
+            }
+        }
+
+        function getFullMessage() {
+            const nameInput = document.getElementById('recipient-name').value.trim();
+            if (nameInput) {
+                return `<span class="text-amber-400 font-semibold not-italic">${nameInput}</span>, ${smartLowerCase(currentBaseMessage)}`;
+            }
+            return currentBaseMessage;
+        }
+
+        function getRawMessageForSharing() {
+            const nameInput = document.getElementById('recipient-name').value.trim();
+            if (nameInput) {
+                return `*${nameInput}*, ${smartLowerCase(currentBaseMessage)}`;
+            }
+            return currentBaseMessage;
+        }
+
+        function updatePreview() {
+            document.getElementById('message-content').innerHTML = getFullMessage();
+        }
+
+        function newMessage() {
+            const contentDiv = document.getElementById('message-content');
+            contentDiv.style.opacity = '0';
+            contentDiv.style.transform = 'translateY(5px)';
+            
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * messages.length);
+                currentBaseMessage = messages[randomIndex];
+                updatePreview();
+                contentDiv.style.opacity = '1';
+                contentDiv.style.transform = 'translateY(0)';
+                
+                const copyBtn = document.getElementById('copy-btn');
+                const copyText = document.getElementById('copy-text');
+                const copyIcon = copyBtn.querySelector('i');
+                copyBtn.classList.remove('bg-green-600', 'border-green-500', 'text-white');
+                copyBtn.classList.add('bg-slate-800', 'border-slate-600');
+                copyText.innerText = "KOPYALA";
+                copyIcon.setAttribute('data-lucide', 'copy');
+                lucide.createIcons();
+                
+            }, 200);
+        }
+
+        function shareWhatsApp() {
+            const text = encodeURIComponent(getRawMessageForSharing());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function copyMessage() {
+            const textToCopy = getRawMessageForSharing().replace(/\*/g, '');
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const copyBtn = document.getElementById('copy-btn');
+                const copyText = document.getElementById('copy-text');
+                const copyIcon = copyBtn.querySelector('i');
+
+                copyBtn.classList.remove('bg-slate-800', 'border-slate-600');
+                copyBtn.classList.add('bg-green-600', 'border-green-500', 'text-white');
+                copyText.innerText = "ALINDI";
+                copyIcon.setAttribute('data-lucide', 'check');
+                lucide.createIcons();
+            });
+        }
+
+        // --- BÖLÜM 2: ZİKİRMATİK SİSTEMİ ---
+        let count = 0;
+        const countDisplay = document.getElementById('zikir-count');
+
+        window.onload = function() {
+            const savedCount = localStorage.getItem('miracZikirCount');
+            if(savedCount) {
+                count = parseInt(savedCount);
+                countDisplay.innerText = count;
+            }
+            newMessage(); 
+        }
+
+        function incrementZikir() {
+            count++;
+            countDisplay.innerText = count;
+            localStorage.setItem('miracZikirCount', count);
+            if (navigator.vibrate) navigator.vibrate(5);
+        }
+
+        function resetZikir() {
+            if(confirm('Zikir sayısını sıfırlamak istiyor musunuz?')) {
+                count = 0;
+                countDisplay.innerText = count;
+                localStorage.setItem('miracZikirCount', 0);
+                if (navigator.vibrate) navigator.vibrate([10, 10, 10]);
+            }
+        }
+
+    </script>
+</body>
+</html>
+
+
             box-shadow: 0 15px 40px -10px rgba(227, 10, 23, 0.4);
             transform: perspective(1000px) rotateX(5deg);
         }
